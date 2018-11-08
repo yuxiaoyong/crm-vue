@@ -1,0 +1,193 @@
+@import './variables.scss';
+@import './animation.scss';
+*{
+  outline: none;
+}
+html{
+  box-sizing: border-box;
+  height:100%;
+  overflow-x:auto;
+  overflow-y: hidden;
+}
+body {
+  box-sizing: border-box;
+  height:100%;
+  padding:0px;
+  margin:0px;
+  overflow-x:auto;
+  overflow-y: hidden;
+}
+
+.primary-color{
+  color:$--color-primary;
+}
+
+.primary-bgcolor{
+  background-color: $--color-primary;
+}
+
+/** =====左侧菜单样式设置start===== */
+.left-navi-menu{
+  height:100%;
+  width:$sidebar_width;
+  box-sizing: border-box;
+  position: fixed;
+  z-index:99;
+}
+.left-navi-menu.collapse{
+  width:$sidebar_width_collapse;
+}
+
+.left-navi-menu .el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+.el-scrollbar__view{
+  height:100%;
+}
+
+.el-menu, .el-submenu{
+  background-color: $sidebar_bgcolor;
+}
+.el-menu .el-menu-item{
+  background-color: $sidebar_bgcolor;
+}
+.el-submenu .el-menu-item{
+  background-color: $sidebar_bgcolor;
+}
+.el-menu-item:hover, .el-menu-item:focus, .el-submenu__title:hover{
+  background-color: $sidebar_bgcolor_hover;
+}
+li.el-menu-item.is-active{
+  border-left:3px solid $sidebar_color_active;
+  background-color: $sidebar_bgcolor_active !important;
+}
+.el-menu-item.is-active:after{
+  right: 0px;
+  border: solid transparent;
+  content: " ";
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  border-right-color: #ffffff;
+  border-width: 8px;
+  margin:auto;
+  top: 0; bottom: 0; right: 0;
+  z-index: 50;
+}
+/** =====左侧菜单样式设置end===== */
+
+/** =====右侧页面按钮菜单栏===== */
+.el-action-bar{
+  height:50px;
+  box-sizing: border-box;
+  border:1px solid #E2E6EC;
+  display: flex;
+  align-items:center;
+  padding:0px 10px;
+  background-color:#F4F6F9;
+}
+
+ul.navi-tab{
+  border-bottom:2px solid $navitab_color_active;
+  list-style: none;
+  height:40px;
+  padding: 0px;
+  margin: 0px;
+  box-shadow: 0px 0px 2px #999999;
+  overflow: hidden;
+  z-index: 9999;
+}
+ul.navi-tab li{
+  display:inline-block;
+  min-width: 50px;
+  line-height: 40px;
+  text-align: center;
+  padding: 0px 15px;
+  font-size:14px;
+  cursor: pointer;
+}
+ul.navi-tab li.active{
+  color:#FFFFFF;
+  background-color:$navitab_color_active;
+}
+ul.navi-tab li i{
+  color:#999999;
+}
+ul.navi-tab li i:hover{
+  color:#FFFFFF;
+  background-color:#FF5722;
+  border-radius: 2px;
+}
+.app-header-fragment{
+  padding-left:$sidebar_width;
+  box-sizing: border-box;
+  position: fixed;
+  width:100%;
+  z-index: 90;
+}
+.app-header-fragment.collapse{
+  padding-left:$sidebar_width_collapse;
+}
+.app-main-fragment{
+  height:100%;
+  padding-top:50px;
+  padding-left:$sidebar_width;
+  box-sizing: border-box;
+  width:100%;
+}
+.app-main-fragment.collapse{
+  padding-left:$sidebar_width_collapse;
+}
+.app-main-fragment .el-scrollbar__wrap{
+  overflow-x:hidden;
+}
+
+.el-dialog.is-fullscreen{
+  overflow: hidden;
+}
+
+.el-dialog.is-fullscreen .el-dialog__body{
+  height: calc(100% - 54px - 70px) !important;
+  overflow-y: auto;
+}
+
+.el-dialog__body{
+  padding: 0px 20px;
+}
+
+.el-form-item .el-select{
+  width:100%;
+}
+
+.wp-item-label{
+  color: $--color-primary;
+  font-size:14px;
+  margin: 5px 0px;
+  display: inline-block;
+}
+.wp-item-label .iconfont{
+  font-size:14px;
+}
+.wp-item-content{
+  color:#666666;
+  font-size:14px;
+  margin: 5px 0px;
+  display: inline-block;
+}
+
+.el-table .hidden-row{
+  display: none;
+}
+
+.el-table .icon-expand-visible{
+  font-weight: bold;
+  cursor:pointer;
+  visibility: visible;
+  color:$--color-primary;
+}
+
+.el-table .icon-expand-hidden{
+  font-weight: bold;
+  cursor:pointer;
+  visibility: hidden;
+}
