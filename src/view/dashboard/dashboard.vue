@@ -1,120 +1,95 @@
 <template>
   <div>
 
-    <el-menu class="el-menu-demo el-action-bar" mode="horizontal" background-color="#F4F6F9" style="height:50px;padding: 7px;box-sizing: border-box;border:1px solid #E2E6EC;">
+<!--    <el-menu class="el-menu-demo el-action-bar" mode="horizontal" background-color="#F4F6F9" style="height:50px;padding: 7px;box-sizing: border-box;border:1px solid #E2E6EC;">-->
 
-      <el-button size="small"><i class="el-icon-search" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 搜索</el-button>
-      <el-button-group>
-        <el-button size="small"><i class="el-icon-plus" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 新建</el-button>
-        <el-button size="small"><i class="el-icon-edit" style="font-weight: bold;font-size:14px;color:#FC9409;"></i> 修改</el-button>
-        <el-button size="small"><i class="el-icon-close" style="font-weight: bold;font-size:14px;color:#FF6873;"></i> 删除</el-button>
-      </el-button-group>
-      <el-button-group>
-        <el-button size="small"><i class="el-icon-upload2" style="font-weight: bold;font-size:14px;color:#3FBC9C;"></i> 导出</el-button>
-        <el-button size="small"><i class="el-icon-download" style="font-weight: bold;font-size:14px;color:#FF6873;"></i> 导入</el-button>
-      </el-button-group>
-
-      <div style="float:right;">
-        <el-button-group>
-          <el-button size="small"><i class="el-icon-search" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 统计</el-button>
-        </el-button-group>
-        <el-button-group>
-          <el-button size="small"><i class="el-icon-plus" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 显示列</el-button>
-        </el-button-group>
-        <el-button-group>
-          <el-button size="small"><i class="el-icon-edit" style="font-weight: bold;font-size:14px;color:#FC9409;"></i> 排序</el-button>
-        </el-button-group>
-      </div>
-
-    </el-menu>
+<!--    </el-menu>-->
 
     <template>
-      <el-table :data="tableData6" border height="350" show-summary style="width: 100%; margin-top: 20px;">
-        <el-table-column prop="id" label="ID" :sortable="true" width="180"></el-table-column>
-        <el-table-column prop="name" label="姓名" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column prop="amount1" label="数值 1（元）"></el-table-column>
-        <el-table-column prop="amount2" label="数值 2（元）"></el-table-column>
-        <el-table-column prop="amount3" label="数值 3（元）"></el-table-column>
-      </el-table>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>订单排名</span>
+            </div>
+            <div class="text item">
+              <div id="chart1" style="width: 100%;height:400px;"></div>
+            </div>
+          </el-card>
+        </el-col>
+        <el-col :span="12">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>客户状态</span>
+            </div>
+            <div class="text item">
+              <div id="chart2" style="width: 100%;height:400px;"></div>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
     </template>
-
-    <el-pagination :current-page="1" :page-sizes="[10, 20, 50, 100]" :page-size="10"
-      layout="total, sizes, prev, pager, next, jumper"
-      prev-text="上一页" next-text="下一页" :background="true" :total="1000">
-    </el-pagination>
 
   </div>
 </template>
 
 <script>
+import * as $dashboard from "../../api/dashboard"
 export default {
-  name: "dashboard",
-  data(){
-      return {
-        tableData6: [{
-          id: '12987122',
-          name: '王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎王小虎',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: '王小虎',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          name: '王小虎',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: '王小虎',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        }, {
-          id: '12987126',
-          name: '王小虎',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
-        }, {
-          id: '12987122',
-          name: '王小虎',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: '王小虎',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          name: '王小虎',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: '王小虎',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        }, {
-          id: '12987126',
-          name: '王小虎',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
+  name: 'dashboard',
+  mounted () {
+    this.createChart1()
+    this.createChart2()
+  },
+  methods: {
+    createChart1 () {
+      var myChart = echarts.init(document.getElementById('chart1'))
+      // 指定图表的配置项和数据
+      var option = {
+        tooltip: {},
+        legend: {
+          data:['类型']
+        },
+        yAxis: {
+          data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        xAxis: {},
+        series: [{
+          name: '销量',
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20]
         }]
       }
-  }
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option)
+    },
 
+    createChart2 () {
+      $dashboard.getCustomerStatusStat().then(function (res) {
+        var myChart = echarts.init(document.getElementById('chart2'))
+        console.log(res.data)
+        myChart.setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+          },
+          series: [
+            {
+              name: '客户状态',
+              type: 'pie',
+              radius: '55%',
+              data: res.data.entryList
+            }
+          ]
+        })
+      })
+    }
+  },
+  data () {
+    return {
+
+    }
+  }
 }
 </script>
 

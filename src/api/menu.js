@@ -1,5 +1,5 @@
-import request from "@/util/request"
-var qs = require('qs');
+import request from '@/util/request'
+var qs = require('qs')
 
 export const ROOT_MENU_ID = 1
 /**
@@ -7,8 +7,8 @@ export const ROOT_MENU_ID = 1
  * @param item
  * @returns {AxiosPromise<any> | * | void}
  */
-export function save(item){
-  return request.post("/menu/save", item);
+export function save (item) {
+  return request.post('/menu/save', item)
 }
 
 /**
@@ -18,9 +18,9 @@ export function save(item){
  * @param size 每页数量
  * @returns {*}
  */
-export function findList({ name, page, size}){
-  return request.get("/menu/findList", {
-    params:{
+export function findList ({name, page, size}) {
+  return request.get('/menu/findList', {
+    params: {
       name: name,
       page: page,
       size: size
@@ -33,16 +33,16 @@ export function findList({ name, page, size}){
  * @param id 菜单ID
  * @returns {*}
  */
-export function findById(id){
-  return request.get("/menu/findById", {
-    params:{
+export function findById (id) {
+  return request.get('/menu/findById', {
+    params: {
       id: id
     }
-  });
+  })
 }
 
-export function findRootMenu(){
-  return findById(ROOT_MENU_ID);
+export function findRootMenu () {
+  return findById(ROOT_MENU_ID)
 }
 
 /**
@@ -50,10 +50,10 @@ export function findRootMenu(){
  * @param id 菜单ID
  * @returns {AxiosPromise<any> | * | void}
  */
-export function deleteById(id){
-  return request.post("/menu/deleteById",
+export function deleteById (id) {
+  return request.post('/menu/deleteById',
     qs.stringify({id: id})
-  );
+  )
 }
 
 /**
@@ -61,8 +61,8 @@ export function deleteById(id){
  * @param ids 菜单ID数组
  * @returns {AxiosPromise<any> | * | void}
  */
-export function deleteByIds(ids){
-  return request.post("/menu/deleteByIds", ids);
+export function deleteByIds (ids) {
+  return request.post('/menu/deleteByIds', ids)
 }
 
 

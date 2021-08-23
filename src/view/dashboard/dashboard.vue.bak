@@ -1,0 +1,116 @@
+<template>
+  <div>
+
+    <el-menu class="el-menu-demo el-action-bar" mode="horizontal" background-color="#F4F6F9" style="height:50px;padding: 7px;box-sizing: border-box;border:1px solid #E2E6EC;">
+
+      <el-button size="small"><i class="el-icon-search" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 搜索</el-button>
+      <el-button-group>
+        <el-button size="small"><i class="el-icon-plus" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 新建</el-button>
+        <el-button size="small"><i class="el-icon-edit" style="font-weight: bold;font-size:14px;color:#FC9409;"></i> 修改</el-button>
+        <el-button size="small"><i class="el-icon-close" style="font-weight: bold;font-size:14px;color:#FF6873;"></i> 删除</el-button>
+      </el-button-group>
+      <el-button-group>
+        <el-button size="small"><i class="el-icon-upload2" style="font-weight: bold;font-size:14px;color:#3FBC9C;"></i> 导出</el-button>
+        <el-button size="small"><i class="el-icon-download" style="font-weight: bold;font-size:14px;color:#FF6873;"></i> 导入</el-button>
+      </el-button-group>
+
+      <div style="float:right;">
+        <el-button-group>
+          <el-button size="small"><i class="el-icon-search" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 统计</el-button>
+        </el-button-group>
+        <el-button-group>
+          <el-button size="small"><i class="el-icon-plus" style="font-weight: bold;font-size:14px;color:#409EFF;"></i> 显示列</el-button>
+        </el-button-group>
+        <el-button-group>
+          <el-button size="small"><i class="el-icon-edit" style="font-weight: bold;font-size:14px;color:#FC9409;"></i> 排序</el-button>
+        </el-button-group>
+      </div>
+
+    </el-menu>
+
+    <template>
+      <el-row>
+        <el-col :span="12">
+          <div id="chart1" style="width: 100%;height:400px;"></div>
+        </el-col>
+        <el-col :span="12">
+          <div id="chart2" style="width: 100%;height:400px;"></div>
+        </el-col>
+      </el-row>
+    </template>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'dashboard',
+  mounted () {
+    this.createChart1()
+    this.createChart2()
+  },
+  methods: {
+    createChart1 () {
+      var myChart = echarts.init(document.getElementById('chart1'))
+      // 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: '订单排名',
+          x: 'center',
+          textAlign: 'center'
+        },
+        tooltip: {},
+        legend: {
+          data:['类型']
+        },
+        yAxis: {
+          data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        xAxis: {},
+        series: [{
+          name: '销量',
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20]
+        }]
+      }
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option)
+    },
+
+    createChart2 () {
+      var myChart = echarts.init(document.getElementById('chart2'))
+      myChart.setOption({
+        title: {
+          text: '客户状态',
+          x: 'center',
+          textAlign: 'center'
+        },
+        series: [
+          {
+            name: '客户状态',
+            type: 'pie',
+            radius: '55%',
+            data:[
+              {value:235, name:'视频广告'},
+              {value:274, name:'联盟广告'},
+              {value:310, name:'邮件营销'},
+              {value:335, name:'直接访问'},
+              {value:400, name:'搜索引擎'}
+            ]
+          }
+        ]
+      })
+    }
+  },
+  data () {
+    return {
+
+    }
+  }
+
+}
+</script>
+
+<style>
+
+</style>

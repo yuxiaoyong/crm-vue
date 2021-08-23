@@ -1,13 +1,13 @@
 import $lodash from "lodash"
 export default {
-  mounted(){
-    this.initialize();
+  mounted () {
+    this.initialize()
   },
-  data(){
+  data () {
     return {
       loading: false,
       pagination: {},
-      selectedRows:[],
+      selectedRows: [],
       defaultSort: 'order,asc',
       query:{
         page: 0,
@@ -16,9 +16,9 @@ export default {
       }
     }
   },
-  methods:{
+  methods: {
 
-    getService(){
+    getService () {
       throw new Error("getService method is not implemented");
     },
 
@@ -96,7 +96,7 @@ export default {
 
     handleDeleteSelected(){
       let ids = [];
-      if(this.selectedRows.length == 0){
+      if(this.selectedRows.length === 0){
         this.$message({
           message: "请选择需要删除的数据",
           type: "warning"

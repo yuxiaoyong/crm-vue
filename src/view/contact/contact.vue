@@ -87,7 +87,7 @@
         </el-form-item>
         <el-form-item label="客户状态">
           <el-radio-group v-model="query.status" size="small">
-            <el-radio-button v-for="status in statusList" :label="status.dictLabel" >{{status.dictLabel}}</el-radio-button>
+            <el-radio v-for="status in statusList" :label="status.dictLabel" border style="width:100px;margin:0px 10px 5px 0px;">{{status.dictLabel}}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="产品类型">
