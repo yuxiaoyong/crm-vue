@@ -64,38 +64,38 @@
 </template>
 
 <script>
-  import * as $service from "../../api/product"
-  import productForm from "./productForm"
-  import BaseListComp from "../../components/BaseListComp";
+import * as $service from "../../api/product"
+import productForm from "./productForm"
+import BaseListComp from "../../components/BaseListComp";
 
-  export default {
-    name: "product",
-    extends: BaseListComp,
-    components:{
-      productForm
-    },
-    data(){
-      return {
-        query:{
-          page: 0,
-          size: 10,
-          sort: 'order,asc'
-        }
+export default {
+  name: "product",
+  extends: BaseListComp,
+  components: {
+    productForm
+  },
+  data(){
+    return {
+      query:{
+        page: 0,
+        size: 10,
+        sort: 'order,asc'
       }
+    }
+  },
+  methods:{
+
+    getService(){
+      return $service;
     },
-    methods:{
 
-      getService(){
-        return $service;
-      },
-
-      handleEdit(item){
-        this.$refs.productForm.open({ item: item });
-      }
-
+    handleEdit(item){
+      this.$refs.productForm.open({ item: item });
     }
 
   }
+
+}
 </script>
 
 <style>

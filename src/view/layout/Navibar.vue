@@ -71,7 +71,7 @@ export default{
         name: "订单管理",
         className: "el-icon-menu",
         path: "/order",
-        display: false
+        display: true
       },{
         name: "进货管理",
         className: "el-icon-menu",
