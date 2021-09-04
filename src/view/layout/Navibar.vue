@@ -34,140 +34,140 @@
 </template>
 <script>
 export default{
-  name: "Navibar",
-  data(){
+  name: 'Navibar',
+  data () {
     return {
-      sidebarCollapsed(){
+      sidebarCollapsed () {
         return this.$store.getters.sidebarCollapsed
       },
       activeIndex: this.$route.path,
-      menus:[{
-        name: "工作台",
-        className: "el-icon-menu",
-        path: "/",
+      menus: [{
+        name: '工作台',
+        className: 'el-icon-menu',
+        path: '/',
         display: true
-      },{
-        name: "我的客户",
-        className: "el-icon-menu",
-        path: "/mycustomer",
+      }, {
+        name: '我的客户',
+        className: 'el-icon-menu',
+        path: '/mycustomer',
         display: true,
-        children:[{
-          name: "客户管理",
-          className: "el-icon-menu",
-          path: "/customer",
+        children: [{
+          name: '客户管理',
+          className: 'el-icon-menu',
+          path: '/customer',
           display: true
-        },{
-          name: "联系人管理",
-          className: "el-icon-menu",
-          path: "/contact",
+        }, {
+          name: '联系人管理',
+          className: 'el-icon-menu',
+          path: '/contact',
           display: true
         }]
-      },{
-        name: "产品管理",
-        className: "el-icon-menu",
-        path: "/product",
+      }, {
+        name: '产品管理',
+        className: 'el-icon-menu',
+        path: '/product',
         display: true
-      },{
-        name: "订单管理",
-        className: "el-icon-menu",
-        path: "/order",
+      }, {
+        name: '订单管理',
+        className: 'el-icon-menu',
+        path: '/order',
         display: true
-      },{
-        name: "进货管理",
-        className: "el-icon-menu",
-        path: "/mypurchase",
+      }, {
+        name: '库存管理',
+        className: 'el-icon-menu',
+        path: '/stock',
+        display: true
+      }, {
+        name: '进货管理',
+        className: 'el-icon-menu',
+        path: '/mypurchase',
         display: true,
-        children:[{
-          name: "供货合同",
-          className: "el-icon-menu",
-          path: "/purchase",
+        children: [{
+          name: '供货合同',
+          className: 'el-icon-menu',
+          path: '/purchase',
           display: true
-        },{
-          name: "供货单位",
-          className: "el-icon-menu",
-          path: "/supplier",
+        }, {
+          name: '供货单位',
+          className: 'el-icon-menu',
+          path: '/supplier',
           display: true
         }]
-      },{
-        name: "库存管理",
-        className: "el-icon-menu",
-        path: "/stock",
+      }, {
+        name: '数据统计',
+        className: 'el-icon-setting',
+        path: '/statistic',
         display: false
-      },{
-        name: "数据统计",
-        className: "el-icon-setting",
-        path: "/statistic",
-        display: false
-      },{
-        name: "字典管理",
-        className: "el-icon-menu",
-        path: "/dict",
+      }, {
+        name: '字典管理',
+        className: 'el-icon-menu',
+        path: '/dict',
         display: true
-      },{
-        name: "菜单管理",
-        className: "el-icon-menu",
-        path: "/menu",
+      }, {
+        name: '菜单管理',
+        className: 'el-icon-menu',
+        path: '/menu',
         display: false
       }]
     }
   },
-  mounted(){
-    this.activeIndex = this.$route.matched[1].path;
-    this.doRoute();
+  mounted () {
+    this.activeIndex = this.$route.matched[1].path
+    this.doRoute()
   },
-  beforeUpdate:function(){
-    this.activeIndex = this.$route.matched[1].path;
+  beforeUpdate () {
+    this.activeIndex = this.$route.matched[1].path
   },
-  watch:{
-    $route(){
-      this.doRoute();
+  watch: {
+    $route () {
+      this.doRoute()
     }
   },
-  methods:{
+  methods: {
 
-    doRoute(){
-      var $this = this;
-      this.menus.forEach(function(menu){
-        $this.wrapData(menu);
-      });
+    doRoute () {
+      var $this = this
+      this.menus.forEach(function (menu) {
+        $this.wrapData(menu)
+      })
 
-      var currentMenu = this.getMenuByPath(this.menus, this.$route.matched[1].path);
-      var breadcrumb = [];
+      var currentMenu = this.getMenuByPath(this.menus, this.$route.matched[1].path)
+      var breadcrumb = []
 
-      while(true){
-        if(!currentMenu){
-          break;
+      while (true) {
+        if (!currentMenu) {
+          break
         }
-        breadcrumb.push(currentMenu);
-        currentMenu = currentMenu.parent;
+        breadcrumb.push(currentMenu)
+        currentMenu = currentMenu.parent
       }
-      this.$store.dispatch('setBreadCrumb', breadcrumb.reverse());
+      this.$store.dispatch('setBreadCrumb', breadcrumb.reverse())
     },
 
-    wrapData(menu){
-      var $this = this;
-      if(!menu.children) return;
-      menu.children.forEach(function(submenu){
-        submenu.parent = menu;
+    wrapData (menu) {
+      let $this = this
+      if (!menu.children) return
+      menu.children.forEach(function (submenu) {
+        submenu.parent = menu
         $this.wrapData(submenu)
-      });
+      })
     },
 
-    getMenuByPath(menus, path){
-      var $this = this;
-      for(var i=0; i< menus.length; i++){
-        if(menus[i].children && menus[i].children.length > 0){
-          var result = $this.getMenuByPath(menus[i].children, path);
-          if(!result)continue;
-          return result;
-        }else if(menus[i].path == path){
-          return menus[i];
+    getMenuByPath (menus, path) {
+      let $this = this
+      for (var i = 0; i < menus.length; i++) {
+        if (menus[i].children && menus[i].children.length > 0) {
+          var result = $this.getMenuByPath(menus[i].children, path)
+          if (!result) continue
+          return result
+        } else if (menus[i].path === path) {
+          return menus[i]
         }
       }
-      return null;
+      return null
     },
 
-    handleMenuSelect(key, keyPath){
+    handleMenuSelect (key, keyPath) {
 
     }
   }

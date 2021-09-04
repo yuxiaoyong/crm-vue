@@ -47,6 +47,9 @@
             <el-tooltip class="item" effect="dark" content="删除产品" placement="top">
               <el-button size="mini" type="danger" circle @click="handleDelete(scope.row)"><i class="el-icon-delete"></i></el-button>
             </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="管理库存" placement="top">
+              <el-button size="mini" type="primary" circle @click="handleStock(scope.row)"><i class="el-icon-goods"></i></el-button>
+            </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
@@ -64,33 +67,37 @@
 </template>
 
 <script>
-import * as $service from "../../api/product"
-import productForm from "./productForm"
-import BaseListComp from "../../components/BaseListComp";
+import * as $service from '../../api/product'
+import productForm from './productForm'
+import BaseListComp from '../../components/BaseListComp'
 
 export default {
-  name: "product",
+  name: 'product',
   extends: BaseListComp,
   components: {
     productForm
   },
-  data(){
+  data () {
     return {
-      query:{
+      query: {
         page: 0,
         size: 10,
         sort: 'order,asc'
       }
     }
   },
-  methods:{
+  methods: {
 
-    getService(){
-      return $service;
+    getService () {
+      return $service
     },
 
-    handleEdit(item){
-      this.$refs.productForm.open({ item: item });
+    handleEdit (item) {
+      this.$refs.productForm.open({ item: item })
+    },
+
+    handleStock (item) {
+      this.$router.push({path: '/stock', params: {productId: item.id}})
     }
 
   }

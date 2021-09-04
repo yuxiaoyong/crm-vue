@@ -22,6 +22,11 @@
               :data="pagination.content" :row-class-name="tableRowClassName"
               @sort-change="handleSortChange" @selection-change="handleSelectionChange" @row-click="showDetailPanel">
       <el-table-column type="selection" width="55" align="center"></el-table-column>
+      <el-table-column prop="serialNo" sortable="custom" fixed min-width="150" label="流水号">
+        <template slot-scope="scope">
+          <el-button size="mini" type="text">{{ scope.row.serialNo }}</el-button>
+        </template>
+      </el-table-column>
       <el-table-column prop="serialNum" sortable="custom" fixed min-width="150" label="订单编号">
         <template slot-scope="scope">
           <el-button size="mini" type="text">{{ scope.row.serialNum }}</el-button>

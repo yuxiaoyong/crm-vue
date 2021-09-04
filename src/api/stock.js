@@ -10,6 +10,12 @@ export function findList (params = {name, page: 1, size: 10, sort: 'order'}) {
   })
 }
 
+export function queryList (params = {keyword, productId, startTime, endTime, page: 1, size: 10, sort: 'order'}) {
+  return request.get('/stock/detail/queryList', {
+    params: params
+  })
+}
+
 export function findById (id) {
   return request.get('/stock/detail/findById', {
     params: {

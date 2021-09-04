@@ -22,7 +22,7 @@
         <el-table border style="width: 100%; margin-top: 20px" v-loading="loading"
                   :data="pagination.content" :row-class-name="tableRowClassName" @sort-change="handleSortChange" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55" align="center"></el-table-column>
-          <el-table-column prop="serialNo" sortable="custom" label="订单编号">
+          <el-table-column prop="serialNo" sortable="custom" label="流水号">
             <template slot-scope="scope">{{ scope.row.serialNo }}</template>
           </el-table-column>
           <el-table-column prop="customer.name" label="客户名称">
@@ -31,7 +31,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="orderTime" sortable="custom" label="订购时间">
-            <template slot-scope="scope">{{ scope.row.orderTime }}</template>
+            <template slot-scope="scope">{{ formatTime(scope.row.orderTime, 'YYYY-MM-DD') }}</template>
           </el-table-column>
           <el-table-column prop="orderPrice" sortable="custom" min-width="80" label="订单价格（元）">
             <template slot-scope="scope">{{ scope.row.orderPrice}}</template>
@@ -80,9 +80,7 @@ export default {
   },
   data () {
     return {
-      pagination: {
-        customer: {name: ''}
-      },
+      pagination: {},
       query: {
         page: 0,
         size: 10,

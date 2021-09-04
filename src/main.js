@@ -25,16 +25,15 @@ Vue.use(Vuex)
 Vue.use(ElementUI, {size: 'small'})
 Vue.use(AppComps)
 
-
 Object.keys(global).forEach((key) => {
-  Vue.prototype[key] = global[key];
+  Vue.prototype[key] = global[key]
 })
 
-Object.defineProperty(Vue.prototype, '$lodash', { value: lodash });
-Vue.prototype.tableSize = "small"
+Object.defineProperty(Vue.prototype, '$lodash', { value: lodash })
+Vue.prototype.tableSize = 'small'
 
-router.beforeEach(function(to, from, next){
-  NProgress.start();
+router.beforeEach(function (to, from, next) {
+  NProgress.start()
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
@@ -47,17 +46,17 @@ router.beforeEach(function(to, from, next){
       } else {
         next()
       }
-    });
+    })
   } else {
     next() // 确保一定要调用 next()
   }
-});
-router.afterEach(function(transition){
-  NProgress.done();
-});
+})
+router.afterEach(function (transition) {
+  NProgress.done()
+})
 
 /* eslint-disable no-new */
-var vueapp = new Vue({
+let vueapp = new Vue({
   el: '#app1',
   router,
   store,
@@ -65,4 +64,4 @@ var vueapp = new Vue({
   template: '<App/>'
 })
 
-window.vueapp = vueapp;
+window.vueapp = vueapp
